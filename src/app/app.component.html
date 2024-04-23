@@ -1,0 +1,133 @@
+<html>
+  <body>
+    <div class="container form" *ngIf="!listflag">
+    <header>Registration Form</header>
+  
+    <form class="form" (ngSubmit)="OnFormSubmitted(registrationForm)" #registrationForm>
+     
+      <div class="column">
+        <div class="input-box">
+          <b>First Name</b>
+          
+          <input type="text" name="firstname" placeholder="First Name" required [(ngModel)]="app.fname" required />&nbsp;
+        </div> 
+  
+        <div class="input-box">
+          <b>Last Name</b>
+          <input type="text" name="lastname" placeholder="Last Name" required [(ngModel)]="app.lname"/>
+        </div>
+      </div>    
+  
+      <div class="input-box">
+        <b>Email</b>
+        <input type="text" placeholder="Enter Email" name="email" required [(ngModel)]="app.email"/>
+      </div>
+  
+      <div class="column">
+        <div class="input-box">
+          <b>Phone Number</b>
+          <input type="number" name="phone" placeholder="Phone Number" value="+91"  required [(ngModel)]="app.pnumber"/>
+        </div>
+
+        <div class="input-box">
+          <b>Date of Birth</b>
+          <input type="date" name="dob" placeholder="Date of Birth" required [(ngModel)]="app.dob" />
+        </div>
+      </div>
+  
+      <div class="input-box">
+        <input type="text" placeholder="username" />
+        <button class="btn-gen-username">
+          Create a Username
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+      </div>
+  </form>
+  
+      <div class="input-box address">
+        <b>Address</b>
+        <textarea cols="100" rows="2" placeholder="Address here..." value="address" required [(ngModel)]="app.add"></textarea>
+        
+         <div class="column">
+          <div class="select-box">
+            <b>Country</b>
+            
+            <select name="country" required [(ngModel)]="app.country">
+              <option hidden>Country</option>
+              <option>America</option>
+              <option>Japan</option>
+              <option>India</option>
+              <option>Nepal</option>
+              <option>London</option>
+              <option>Indonesia</option>
+            </select>
+          </div>
+
+          <b>City</b>
+          <input type="text"  name="city" placeholder="City Name" required [(ngModel)]="app.city"/>
+        </div>
+        <div class="column">
+          <b>State</b>
+          <input type="text" name="state" placeholder="State Name" required [(ngModel)]="app.state"/>
+          <b>Pin</b>
+          <input type="number" name="pin" placeholder="Postal code" required [(ngModel)]="app.pin"/>
+        </div>
+      </div>
+
+      <button type="submit" class="submitbtn" (click)="onSave()">Submit</button>
+
+      <button type="button" class="cancelbtn" (click)="onCancel()">Cancel</button>
+
+  </div>
+
+  <div *ngIf="listflag">
+    <h2>TABLE</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    <th>Date of Birth</th>
+    <th>Gender</th>
+    <th>Address</th>
+    <th>Country</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Pin</th>
+  </tr>
+
+  <tr *ngFor="let ele of elements; let rindex = index">
+    <td>{{ele.fname}}</td>
+    <td>{{ele.lname}}</td>
+    <td>{{ele.email}}</td>
+    <td>{{ele.pnumber}}</td>
+    <td>{{ele.dob}}</td>
+    <td>{{ele.gender}}</td>
+    <td>{{ele.add}}</td>
+    <td>{{ele.country}}</td>
+    <td>{{ele.city}}</td>
+    <td>{{ele.state}}</td>
+    <td>{{ele.pin}}</td>
+    <td>
+      <button type="button" class="update-btn" (click)="onUpdate(ele, rindex)">Update</button>
+
+      <button type="button" class="delete-btn" (click)="onDelete(ele)">Delete</button>
+
+    </td>
+  </tr>
+  </table>
+  <button type="button" class="back" (click)="onBack()">Back</button>
+  </div>
+  </body>
+</html>
